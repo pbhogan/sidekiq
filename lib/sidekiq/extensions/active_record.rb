@@ -18,7 +18,7 @@ module Sidekiq
       include Sidekiq::Worker
 
       def perform(yml)
-        (target, method_name, args) = YAML.load(yml)
+        (target, method_name, args) = YAML.unsafe_load(yml)
         target.__send__(method_name, *args)
       end
     end
